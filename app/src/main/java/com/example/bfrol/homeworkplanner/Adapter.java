@@ -9,40 +9,37 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Adapter extends BaseAdapter {
-    private List<String> subjectList;
-
-    public Adapter(List<String> sl) {
-        subjectList = sl;
+    private List<String> taskList;
+    private List<List<String>> scheduleList;
+    public Adapter(List<String> taskList, List<List<String>> scheduleList) {
+        this.taskList = taskList;
+        this.scheduleList = scheduleList;
     }
 
     @Override
     public int getCount() {
-        return subjectList.size();
+        return taskList.size();
     }
 
     @Override
     public String getItem(int position) {
-        return subjectList.get(position);
+        return taskList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return position;
     }
-    public void appendString(String s)
-    {
-        subjectList.add(s);
-    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View subject_view;
+        View task_view;
         if(convertView!=null)
-            subject_view = convertView;
+            task_view = convertView;
         else
-            subject_view = inflater.inflate(R.layout.subject_item,parent,false);
-        TextView subjectText = subject_view.findViewById(R.id.subject_text);
+            task_view = inflater.inflate(R.layout.subject_item,parent,false);
+        TextView subjectText = task_view.findViewById(R.id.subject_text);
         subjectText.setText(getItem(position));
-        return subject_view;
+        return task_view;
     }
 }

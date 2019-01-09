@@ -29,6 +29,8 @@ public class HomeworkFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent openAddTaskActivity = new Intent(getContext(),AddTaskActivity.class);
+                startActivityForResult(openAddTaskActivity,0);
             }
         });
     }
@@ -36,5 +38,10 @@ public class HomeworkFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data!=null)
+        {
+            String subjectName = data.getStringExtra("subject_name");
+            String taskText = data.getStringExtra("task_text");
+        }
     }
 }

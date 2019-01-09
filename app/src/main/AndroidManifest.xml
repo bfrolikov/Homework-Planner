@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SelectSubjectActivity" />
-        <activity android:name=".SubjectAddActivity"></activity>
+        <activity android:name=".SubjectAddActivity" />
+        <activity android:name=".AddTaskActivity"></activity>
     </application>
 
 </manifest>

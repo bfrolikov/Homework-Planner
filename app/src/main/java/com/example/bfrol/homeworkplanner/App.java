@@ -17,14 +17,6 @@ public class App extends Application {
         {
             schedule.add(new ArrayList<String>());
         }
-        for(int i=0;i<7;i++)
-        {
-            schedule.get(i).add("Test");
-        }
-        for(int i=0;i<7;i++)
-        {
-            schedule.get(i).add("Test1");
-        }
         super.onCreate();
     }
 

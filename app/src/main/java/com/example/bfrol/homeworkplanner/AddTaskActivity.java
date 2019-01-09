@@ -8,25 +8,27 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectSubjectActivity extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity {
     Spinner spinner;
     ArrayAdapter<String> adapter;
     Button addSubjectButton;
     Button selectOkButton;
+    EditText taskText;
     private int currentSpinnerArrayPosition = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_subject);
-        addSubjectButton = findViewById(R.id.add_subject_button);
-        selectOkButton = findViewById(R.id.select_ok_button);
-        spinner = findViewById(R.id.subjects);
+        setContentView(R.layout.activity_add_task);
+        addSubjectButton = findViewById(R.id.actadd_add_subject_button);
+        selectOkButton = findViewById(R.id.actadd_select_ok_button);
+        spinner = findViewById(R.id.actadd_subjects);
+        taskText = findViewById(R.id.task_text);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,((App)getApplication()).getSubjects());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -49,13 +51,14 @@ public class SelectSubjectActivity extends AppCompatActivity {
         selectOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnSubject = new Intent();
+                Intent returnTask = new Intent();
                 List<String> sNameTemp = ((App)getApplication()).getSubjects();
                 if (currentSpinnerArrayPosition >= sNameTemp.size())
-                    returnSubject.putExtra("subject_name"," ");
+                    returnTask.putExtra("subject_name"," ");
                 else
-                    returnSubject.putExtra("subject_name",sNameTemp.get(currentSpinnerArrayPosition));
-                setResult(0,returnSubject);
+                    returnTask.putExtra("subject_name",sNameTemp.get(currentSpinnerArrayPosition));
+                returnTask.putExtra("task_text",taskText.getText().toString());
+                setResult(0,returnTask);
                 finish();
             }
         });

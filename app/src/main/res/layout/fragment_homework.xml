@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ListView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/homework_list_view"></ListView>
+        android:layout_height="match_parent"
+        android:id="@+id/homework_scroll_view"></ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_homework"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        />
 </FrameLayout>

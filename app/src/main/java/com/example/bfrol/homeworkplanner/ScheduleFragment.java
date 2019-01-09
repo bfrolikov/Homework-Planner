@@ -45,7 +45,9 @@ public class ScheduleFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null)
         {
-
+            String subjectName = data.getStringExtra("subject_name");
+            ((App)getActivity().getApplication()).appendSubjectToDay(subjectName,requestCode);
+            recAdapter.notifyDataSetChanged();
         }
     }
 }

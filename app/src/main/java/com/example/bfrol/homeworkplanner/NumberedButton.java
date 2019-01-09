@@ -11,7 +11,7 @@ public class NumberedButton extends android.support.v7.widget.AppCompatButton {
     public NumberedButton(Context context,int id) {
         super(context);
         this.id = id;
-        super.setText(Integer.toString(id));
+        super.setText("+");
     }
 
     @Override
