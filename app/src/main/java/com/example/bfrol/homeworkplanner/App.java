@@ -8,11 +8,17 @@ import java.util.List;
 public class App extends Application {
     ArrayList<String> subjects;
     List<List<String>> schedule;
+    ArrayList<String> tasks;
+
+    public ArrayList<String> getTasks() {
+        return tasks;
+    }
 
     @Override
     public void onCreate() {
         subjects = new ArrayList<>();
         schedule = new ArrayList<>();
+        tasks = new ArrayList<>();
         for(int i=0;i<7;i++)
         {
             schedule.add(new ArrayList<String>());

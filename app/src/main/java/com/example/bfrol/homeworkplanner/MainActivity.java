@@ -105,5 +105,3 @@ public class MainActivity extends AppCompatActivity
 
 }
 
-//TODO (1) реализовать RecyclerView внутри RecyclerView для фрагмента с расписанием
-//TODO (2) добавить окно добавления задания
