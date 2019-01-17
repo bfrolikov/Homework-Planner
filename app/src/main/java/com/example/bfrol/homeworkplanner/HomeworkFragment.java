@@ -71,8 +71,13 @@ public class HomeworkFragment extends Fragment {
         TextView date = v.findViewById(R.id.date);
         String dataFormatPattern = "dd MMMM yyyy, EEEE";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dataFormatPattern, Locale.getDefault());
-        String dateString = simpleDateFormat.format(getSubjectDeadline(subjectName));
-        date.setText("Срок сдачи: "+dateString);
+        String dateString;
+        if(getSubjectDeadline(subjectName)!=null)
+            dateString = "Срок сдачи: "+simpleDateFormat.format(getSubjectDeadline(subjectName));
+        else
+            dateString = "Добавьте предмет в расписание";
+
+        date.setText(dateString);
         subjectNameTextView.setText(subjectName);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +93,7 @@ public class HomeworkFragment extends Fragment {
     {
         ((App)getActivity().getApplication()).getTasks().add(subjectName+","+taskText);
     }
+    @Nullable
     private Date getSubjectDeadline(String subjectName)
     {
         Calendar c = Calendar.getInstance();
@@ -117,6 +123,6 @@ public class HomeworkFragment extends Fragment {
                 return c.getTime();
             }
         }
-        return c.getTime();
+        return null;
     }
 }

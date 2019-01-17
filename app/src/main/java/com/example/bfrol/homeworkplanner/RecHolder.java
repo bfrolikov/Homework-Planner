@@ -31,6 +31,34 @@ class RecHolder extends RecyclerView.ViewHolder {
         layout.setLayoutParams(layoutParams);
         List<String> daySchedule = schedule.get(pos);
         layout.setOrientation(LinearLayout.VERTICAL);//TODO (1) переделать разметку этого LinearLayout в xml-файл
+        View dayName = inflater.inflate(R.layout.day_name,layout,false);
+        TextView dayNameText = dayName.findViewById(R.id.day_name);
+        switch (pos)
+        {
+            case 0:
+                dayNameText.setText("Понедельник");
+                break;
+            case 1:
+                dayNameText.setText("Вторник");
+                break;
+            case 2:
+                dayNameText.setText("Среда");
+                break;
+            case 3:
+                dayNameText.setText("Четверг");
+                break;
+            case 4:
+                dayNameText.setText("Пятница");
+                break;
+            case 5:
+                dayNameText.setText("Суббота");
+                break;
+            case 6:
+                dayNameText.setText("Воскресенье");
+                break;
+
+        }
+        layout.addView(dayName);
         for(int i = 0;i<daySchedule.size();++i)
         {
             View v = inflater.inflate(R.layout.subject_item,layout,false);
