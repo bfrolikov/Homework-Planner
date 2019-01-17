@@ -95,7 +95,7 @@ public class HomeworkFragment extends Fragment {
         if(today==-1)
             today=6;
         List<List<String>> scheduleTemp = ((App)getActivity().getApplication()).getSchedule();
-        for(int i=today;i<scheduleTemp.size();++i)
+        for(int i=today+1;i<scheduleTemp.size();++i)
         {
             if(scheduleTemp.get(i).contains(subjectName))
             {

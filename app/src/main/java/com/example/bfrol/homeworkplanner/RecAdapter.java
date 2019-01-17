@@ -12,7 +12,7 @@ import java.util.List;
 public class RecAdapter extends RecyclerView.Adapter <RecHolder> {
     private List<List<String>> schedule;
     private View.OnClickListener listener;
-    public RecAdapter(List<List<String>> schedule, View.OnClickListener listener) {
+    RecAdapter(List<List<String>> schedule, View.OnClickListener listener) {
         this.schedule = schedule;
         this.listener = listener;
     }
@@ -22,12 +22,12 @@ public class RecAdapter extends RecyclerView.Adapter <RecHolder> {
         ScrollView sc = new ScrollView(viewGroup.getContext());
         ScrollView.LayoutParams layoutParams= new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT,ScrollView.LayoutParams.MATCH_PARENT);
         sc.setLayoutParams(layoutParams);
-        return new RecHolder(sc,listener);
+        return new RecHolder(sc,listener,schedule,this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecHolder recHolder, int i) {
-        recHolder.bind(schedule.get(i),i);
+        recHolder.bind(i);
     }
 
     @Override

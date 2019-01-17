@@ -1,5 +1,7 @@
 package com.example.bfrol.homeworkplanner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,24 +13,46 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class RecHolder extends RecyclerView.ViewHolder {
+class RecHolder extends RecyclerView.ViewHolder {
     private View.OnClickListener listener;
-    public RecHolder(@NonNull ScrollView itemView, View.OnClickListener listener) {
+    private List<List<String>> schedule;
+    private RecAdapter adapter;
+    RecHolder(@NonNull ScrollView itemView, View.OnClickListener listener, List<List<String>> schedule,RecAdapter adapter) {
         super(itemView);
         this.listener = listener;
+        this.schedule = schedule;
+        this.adapter = adapter;
     }
-    public void bind(List<String> daySchedule,int pos)
+    void bind(final int pos)
     {
         LayoutInflater inflater = LayoutInflater.from(itemView.getContext());
         LinearLayout layout = new LinearLayout(itemView.getContext());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(layoutParams);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        for(String s:daySchedule)
+        List<String> daySchedule = schedule.get(pos);
+        layout.setOrientation(LinearLayout.VERTICAL);//TODO (1) переделать разметку этого LinearLayout в xml-файл
+        for(int i = 0;i<daySchedule.size();++i)
         {
             View v = inflater.inflate(R.layout.subject_item,layout,false);
             TextView subject_name = v.findViewById(R.id.subject_text);
-            subject_name.setText(s);
+            subject_name.setText(daySchedule.get(i));
+            final int iConst = i;
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                    builder.setMessage("Удалить?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            schedule.get(pos).remove(iConst);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                    return true;
+                }
+            });
             layout.addView(v);
         }
         NumberedButton addButton = new NumberedButton(itemView.getContext(),pos);
