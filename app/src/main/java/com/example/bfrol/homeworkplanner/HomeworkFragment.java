@@ -1,5 +1,7 @@
 package com.example.bfrol.homeworkplanner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +26,7 @@ import java.util.Locale;
 public class HomeworkFragment extends Fragment {
     FloatingActionButton fab;
     LinearLayout homeworkLinearLayout;
+    ArrayList<String> tasks;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,16 +35,12 @@ public class HomeworkFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-        //TODO (1) Парсинг tasks и заполнение homeworklinearlayout подгруженными заданиями
+        //Парсинг tasks и заполнение homeworklinearlayout подгруженными заданиями
         super.onViewCreated(view, savedInstanceState);
         fab = view.findViewById(R.id.fab_homework);
         homeworkLinearLayout = view.findViewById(R.id.homework_linear_layout);
-        ArrayList<String> tasksTemp  = ((App)getActivity().getApplication()).getTasks();
-        for (String task : tasksTemp)
-        {
-            String [] taskAndName = task.split(",");
-            addTaskToFragment(taskAndName[0],taskAndName[1]);
-        }
+        tasks = ((App)getActivity().getApplication()).getTasks();
+        refillTasks();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,11 +57,11 @@ public class HomeworkFragment extends Fragment {
         {
             final String subjectName = data.getStringExtra("subject_name");
             final String taskText = data.getStringExtra("task_text");
-            addTaskToFragment(subjectName,taskText);
-            addTaskToArray(subjectName,taskText);
+            addTaskToFragment(subjectName,taskText,tasks.size());
+            tasks.add(subjectName+","+taskText);//adding the created task to tasks array
         }
     }
-    private void addTaskToFragment(String subjectName, final String taskText)
+    private void addTaskToFragment(String subjectName, final String taskText,final int taskIndex)
     {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -87,11 +86,23 @@ public class HomeworkFragment extends Fragment {
                 startActivity(openShowTaskActivivty);
             }
         });
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Удалить?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tasks.remove(taskIndex);
+                        refillTasks();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            }
+        });
         homeworkLinearLayout.addView(v);
-    }
-    private void addTaskToArray(String subjectName, String taskText)
-    {
-        ((App)getActivity().getApplication()).getTasks().add(subjectName+","+taskText);
     }
     @Nullable
     private Date getSubjectDeadline(String subjectName)
@@ -124,5 +135,15 @@ public class HomeworkFragment extends Fragment {
             }
         }
         return null;
+    }
+    private void refillTasks()
+    {
+        if(homeworkLinearLayout.getChildCount()>0)
+            homeworkLinearLayout.removeAllViews();
+        for (int i = 0;i<tasks.size();++i)
+        {
+            String [] taskAndName = tasks.get(i).split(",",2);
+            addTaskToFragment(taskAndName[0],taskAndName[1],i);
+        }
     }
 }
