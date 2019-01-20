@@ -16,5 +16,11 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="DialogThemeWider" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:minWidth">500sp</item>
+    </style>
+    <style name="HintText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/colorHint</item>
+    </style>
 
 </resources>

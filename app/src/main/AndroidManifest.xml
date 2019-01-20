@@ -20,10 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectSubjectActivity" />
-        <activity android:name=".SubjectAddActivity" />
-        <activity android:name=".AddTaskActivity" />
-        <activity android:name=".ShowTaskActivity"></activity>
+        <activity android:name=".SelectSubjectActivity"
+            android:label="Выберите предмет"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+        <activity
+            android:name=".SubjectAddActivity"
+            android:theme="@style/DialogThemeWider"
+            android:label="Введите название предмета"/>
+        <activity android:name=".AddTaskActivity"
+            android:theme="@style/DialogThemeWider"
+            android:label="Добавить задание"/>
+        <activity android:name=".ShowTaskActivity"
+            android:label="Задание"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"></activity>
     </application>
 
 </manifest>

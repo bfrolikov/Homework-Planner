@@ -22,9 +22,17 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.bfrol.homeworkplanner.App.APP_PREFERENCES;
+import static com.example.bfrol.homeworkplanner.App.DAY;
+import static com.example.bfrol.homeworkplanner.App.SUBJECTS;
+import static com.example.bfrol.homeworkplanner.App.TASK;
+import static com.example.bfrol.homeworkplanner.App.TASKS_SIZE;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    public static final String APP_PREFERENCES = "app_preferences";
+
     Fragment fragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +62,39 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences sPreferences = getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sPreferences.edit();
         editor.clear();
-        //TODO сохранение в sharedPreferences
+        List<List<String>> schedule = ((App)getApplication()).getSchedule();
+        ArrayList<String> subjects = ((App)getApplication()).getSubjects();
+        ArrayList<String> tasks = ((App)getApplication()).getTasks();
 
+        for(int i=0;i<schedule.size();i++)
+        {
+            StringBuilder builder = new StringBuilder();
+            for(int j=0;j<schedule.get(i).size();j++)
+            {
+                if(j==schedule.get(i).size()-1)
+                    builder.append(schedule.get(i).get(j));
+                else
+                    builder.append(schedule.get(i).get(j)).append(",");
+            }
+            editor.putString(DAY+Integer.toString(i),builder.toString());
+        }//Writing schedule
+
+        StringBuilder builderSubjects = new StringBuilder();
+        for(int i=0;i<subjects.size();i++)
+        {
+            if(i==subjects.size()-1)
+                builderSubjects.append(subjects.get(i));
+            else
+                builderSubjects.append(subjects.get(i)).append(",");
+        }
+        editor.putString(SUBJECTS,builderSubjects.toString());//Writing subjects
+
+        editor.putInt(TASKS_SIZE,tasks.size());
+        for(int i=0;i<tasks.size();i++)
+        {
+            editor.putString(TASK+Integer.toString(i),tasks.get(i));
+        }
+        //writing tasks
         editor.apply();
     }
 

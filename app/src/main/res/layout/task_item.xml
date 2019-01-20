@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="60sp"
+    android:background="@drawable/rectangle_back"
+    android:layout_marginTop="10sp">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="wrap_content"
         android:id="@+id/subject_text_task"
-        android:paddingTop="15sp"
         android:paddingStart="10sp"
         android:paddingEnd="10sp"
         android:textSize="20sp"
+        android:paddingTop="6sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:text="TEST"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/date"
         android:paddingStart="10sp"
-        android:paddingEnd="10sp"/>
+        android:paddingEnd="10sp"
+        android:text="test date"/>
 </LinearLayout>
