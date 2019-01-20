@@ -16,14 +16,14 @@ public class App extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         subjects = new ArrayList<>();
         schedule = new ArrayList<>();
         tasks = new ArrayList<>();
-        for(int i=0;i<7;i++)
-        {
+        for(int i=0;i<7;i++) {
             schedule.add(new ArrayList<String>());
         }
-        super.onCreate();
+        //TODO чтение из sharedPreferences
     }
 
     public ArrayList<String> getSubjects() {

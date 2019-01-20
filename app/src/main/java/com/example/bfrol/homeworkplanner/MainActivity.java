@@ -1,5 +1,7 @@
 package com.example.bfrol.homeworkplanner;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,9 +22,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public static final String APP_PREFERENCES = "app_preferences";
     Fragment fragment = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,18 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.screen_area,fragment);
         transaction.commit();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sPreferences = getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPreferences.edit();
+        editor.clear();
+        //TODO сохранение в sharedPreferences
+
+        editor.apply();
     }
 
     @Override

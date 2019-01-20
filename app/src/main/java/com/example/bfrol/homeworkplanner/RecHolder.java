@@ -75,6 +75,11 @@ class RecHolder extends RecyclerView.ViewHolder {
                             schedule.get(pos).remove(iConst);
                             adapter.notifyDataSetChanged();
                         }
+                    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
