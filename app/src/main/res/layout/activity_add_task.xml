@@ -29,7 +29,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="266sp"
-            android:id="@+id/task_text"/>
+            android:id="@+id/task_text"
+            android:hint="Введите текст задания\..."/>
     </LinearLayout>
     <Button
         android:id="@+id/actadd_select_ok_button"

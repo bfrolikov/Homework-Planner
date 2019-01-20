@@ -69,11 +69,16 @@ class RecHolder extends RecyclerView.ViewHolder {
                 @Override
                 public boolean onLongClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-                    builder.setMessage("Удалить?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    builder.setMessage("Удалить предмет?").setPositiveButton("Да", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             schedule.get(pos).remove(iConst);
                             adapter.notifyDataSetChanged();
+                        }
+                    }).setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
                         }
                     });
                     AlertDialog alertDialog = builder.create();
