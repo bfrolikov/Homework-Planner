@@ -76,3 +76,4 @@ public class App extends Application {
         return schedule;
     }
 }
+//TODO change it so that every string is in the resource file
